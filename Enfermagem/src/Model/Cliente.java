@@ -4,12 +4,20 @@ public class Cliente {
 	
 	enum Prioridade {
 	    NORMAL,
-	    Prioritario
+	    PRIORIDADE
 	  }
 	
 	private int idPaciente, idSenha, idadePaciente;
-	private String nomePaciente, especialidade;
+	private String nomePaciente, especialidade, sala;
 	
+	public String getSala() {
+		return sala;
+	}
+
+	public void setSala(String sala) {
+		this.sala = sala;
+	}
+
 	public int getIdPaciente() {
 		return idPaciente;
 	}

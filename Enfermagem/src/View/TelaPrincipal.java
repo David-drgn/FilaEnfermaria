@@ -4,66 +4,78 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TelaPrincipal extends JFrame {
-	private JPanel historicoPanel, atendimentoPanel, buttonPanel;
+import Controller.EntradaPaciente;
+
+public class TelaPrincipal extends JFrame implements ActionListener {
+	private JPanel buttonPanel, medicoPanel, pacientePanel, atendentePanel;
 	private JButton buttons[];
 	private JLabel label[];
 	public TelaPrincipal( )
 	{
-		atendimentoPanel = new JPanel();
-		atendimentoPanel.setLayout(new GridLayout(2,3));
-		label = new JLabel[ 9 ];
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(2,4));
+		buttonPanel.setSize(100,100);
+		
+		medicoPanel = new JPanel();
+		medicoPanel.setLayout(new GridLayout(2,4));
+		medicoPanel.setSize(100,100);
+		
+		pacientePanel = new JPanel();
+		pacientePanel.setLayout(new GridLayout(2,4));
+		pacientePanel.setSize(100,100);
+		
+		atendentePanel = new JPanel();
+		atendentePanel.setLayout(new GridLayout(1,2));
+		pacientePanel.setSize(100,100);
+		atendentePanel.setVisible(false);
+		
+		/* TELA PRINCIPAL */
+		
+		label = new JLabel[4];
 		
 		label[0] = new JLabel("--------------------", SwingConstants.CENTER);
-		label[1] = new JLabel("ORDEM DE ATENDIMENTO", SwingConstants.CENTER);
-		label[2] = new JLabel("--------------------", SwingConstants.CENTER);
+		label[1] = new JLabel("QUAL VOCÊ ", SwingConstants.RIGHT);
+		label[2] = new JLabel("SERIA?", SwingConstants.LEFT);
+		label[3] = new JLabel("--------------------", SwingConstants.CENTER);
 		
-		label[3] = new JLabel("Senha", SwingConstants.CENTER);
-		label[4] = new JLabel("Nome", SwingConstants.CENTER);
-		label[5] = new JLabel("Sala", SwingConstants.CENTER);
+		buttons = new JButton[ 5 ];
 		
-		label[0].setAlignmentX(Component.CENTER_ALIGNMENT);
-		label[1].setAlignmentX(Component.CENTER_ALIGNMENT);
-		label[2].setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		atendimentoPanel.add( label[ 0 ] );
-		atendimentoPanel.add( label[ 1 ] );
-		atendimentoPanel.add( label[ 2 ] );
-		
-		atendimentoPanel.add( label[ 3 ] );
-		atendimentoPanel.add( label[ 4 ] );
-		atendimentoPanel.add( label[ 5 ] );
-		
-		historicoPanel = new JPanel();
-		historicoPanel.setLayout(new GridLayout(1,3));
-		
-		label[6] = new JLabel("--------------------", SwingConstants.CENTER);
-		label[7] = new JLabel("HISTORICO DE ATENDIMENTO", SwingConstants.CENTER);
-		label[8] = new JLabel("--------------------", SwingConstants.CENTER);
-		
-		historicoPanel.add(label[6]);
-		historicoPanel.add(label[7]);
-		historicoPanel.add(label[8]);
-		
-		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(1,2));
-		buttons = new JButton[ 2 ];
-		
-		buttons[ 0 ] = new JButton( "Adicionar paciente" );
-		buttons[0].setSize(100,100);
+		buttons[ 0 ] = new JButton( "Sou Médico" );
 		buttonPanel.add( buttons[ 0 ] );
 		
-		buttons[ 1 ] = new JButton( "Paciente atendido" );
+		buttons[ 1 ] = new JButton( "Sou Atendente" );
 		buttonPanel.add( buttons[ 1 ] );
 		
+		buttons[ 2 ] = new JButton( "Sou Paciente" );
+		buttonPanel.add( buttons[ 2 ] );
+		
+		buttons[ 3 ] = new JButton( "Sair" );
+		buttonPanel.add( buttons[ 3 ] );
+		
+		buttons[0].addActionListener(this);
+		buttons[1].addActionListener(this);
+		buttons[2].addActionListener(this);
+		buttons[3].addActionListener(this);
+		
+		buttonPanel.add(label[0]);buttonPanel.add(label[1]);buttonPanel.add(label[2]);buttonPanel.add(label[3]);
+		buttonPanel.add(buttons[0]);buttonPanel.add(buttons[1]);buttonPanel.add(buttons[2]);buttonPanel.add(buttons[3]);
+	
+		/* TELA ATENDENTE */
+		
+		buttons[ 3 ] = new JButton( "Adicionar paciente" );
+		buttons[ 4 ] = new JButton( "Sair" );
+		
+		atendentePanel.add(buttons[3]);
+		atendentePanel.add(buttons[4]);
+		
 		JFrame c = new JFrame("Tela atendimento");
-		c.setSize(400,400);
+		c.setSize(600,100);
 		
-		c.getContentPane().setLayout(new GridLayout(3,1));
+		c.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		c.getContentPane().add( atendimentoPanel);
-		c.getContentPane().add( historicoPanel );
-		c.getContentPane().add( buttonPanel);
+		c.getContentPane().add(buttonPanel);
+		
+		c.getContentPane().add(atendentePanel);
 		
 		c.setVisible(true);
 	}
@@ -74,5 +86,21 @@ public class TelaPrincipal extends JFrame {
 				new WindowAdapter() {
 					public void windowClosing( WindowEvent e )
 					{ System.exit( 0 ); } } );
+	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == buttons[0]) {
+			buttonPanel.setVisible(false);
+			buttonPanel.setPreferredSize(new Dimension(0,0));
+			atendentePanel.setVisible(true);
+		}
+		if(e.getSource() == buttons[1]) {
+			
+		}
+		if(e.getSource() == buttons[2]) {
+			
+		}
+		if(e.getSource() == buttons[3]) {
+			System.exit( 0 );
+		}
 	}
 }

@@ -4,27 +4,51 @@ import javax.swing.JOptionPane;
 
 public class EntradaPaciente {
 	
-	static enum Prioridade {
+	private enum Prioridade {
 	    NORMAL,
 	    PRIORIDADE
 	}
 	
+	private String prioridade = "NORMAL";
 	private String sala;
-	private String nome; 
-	private String idadeEntrada;
+	private String nome = ""; 
+	private String idadeEntrada = "";
 	private int idade;
 
 	public void criandoPaciente(){
-		nome = JOptionPane.showInputDialog(nome, "Nome do Paciente" );
-		sala = JOptionPane.showInputDialog(sala, "Sala de atendimento" );
-		idadeEntrada = JOptionPane.showInputDialog(idade, "Idade do paciente");
+		nome = JOptionPane.showInputDialog("Nome do Paciente" );
+		while(nome == null || nome == "") {
+			nome = JOptionPane.showInputDialog("Nome do paciente");
+		}
+		idadeEntrada = JOptionPane.showInputDialog("Idade do paciente");
+		while(idadeEntrada == null) {
+			idadeEntrada = JOptionPane.showInputDialog("Idade do paciente");
+		}
 		idade = Integer.parseInt(idadeEntrada);
 		if(idade >= 60) {
+			prioridade = "PRIORIDADE";
 		}
 	}
 
-	private String parseInt(String showInputDialog) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getPrioridade() {
+		return prioridade;
 	}
+
+	public String getSala() {
+		return sala;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getIdadeEntrada() {
+		return idadeEntrada;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+	
+	
 }

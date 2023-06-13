@@ -137,7 +137,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		buttons[8].addActionListener(this);
 		buttons[8].setBackground(Color.RED);
 
-		buttons[12] = new JButton("OPÇÕES DO PACIENTE:");
+		buttons[12] = new JButton("OPCOES DO PACIENTE:");
 		buttons[12].setBackground(Color.LIGHT_GRAY);
 
 		buttons[9] = new JButton("Ver minha posicao");
@@ -175,7 +175,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		buttons[13].addActionListener(this);
 		buttons[13].setBackground(Color.RED);
 
-		buttons[14] = new JButton("OPÇÕES DO PACIENTE:");
+		buttons[14] = new JButton("OPCOES DO PACIENTE:");
 		buttons[14].setBackground(Color.LIGHT_GRAY);
 
 		buttons[15] = new JButton("Ver minha posicao");
@@ -276,9 +276,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			if (cont == 50) {
 				JOptionPane.showMessageDialog(c, "FILA CHEIA");
 			} else {
-				
 				posicaoPrioridade = cliente.getCont();
-				System.out.println(posicaoPrioridade + " " + auxposicaoPrioridade);
 				
 				pacientePanel.remove(buttons[8]);
 				pacientePanel.remove(buttons[9]);
@@ -330,7 +328,6 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 				if (prioridade.equals("Preferencial")) {
 					int i;
 					int contaComum = 0;
-					System.out.println(posicaoPrioridade + " " + auxposicaoPrioridade);
 					for (i = posicaoPrioridade; i <= cont; i++) {
 
 						if (contaComum >= 3) {
@@ -444,7 +441,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == buttons[9]) {
+		if (e.getSource() == buttons[9] || e.getSource() == buttons[15]) {
 
 			for (int i = 0; i < cont; i++) {
 
@@ -472,25 +469,32 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			PedeSenha senha = new PedeSenha();
 			int id;
 			id = Integer.parseInt(senha.getSenha());
-
 			id = id - 1;
 
 			if (id >= cont) {
-				JOptionPane.showMessageDialog(null, "Senha não encontrada");
+				JOptionPane.showMessageDialog(null, "Senha nao encontrada");
 			}
 
 			else {
-				txtField[id][1].setBackground(Color.red);
-				txtField[id][2].setBackground(Color.red);
-				txtField[id][3].setBackground(Color.red);
-				txtField[id][4].setBackground(Color.red);
-				txtField[id][5].setBackground(Color.red);
+				id = id-1;
+				String senha1 = "" + (id+2);
+				for (int i = 0; i <= cont - 1; i++) {
+					if (txtField[i][1].getText().equals(senha1)) {
+						txtField[i][1].setBackground(Color.red);
+						txtField[i][2].setBackground(Color.red);
+						txtField[i][3].setBackground(Color.red);
+						txtField[i][4].setBackground(Color.red);
+						txtField[i][5].setBackground(Color.red);
 
-				txtField[id][1].setDisabledTextColor(Color.BLACK);
-				txtField[id][2].setDisabledTextColor(Color.BLACK);
-				txtField[id][3].setDisabledTextColor(Color.BLACK);
-				txtField[id][4].setDisabledTextColor(Color.BLACK);
-				txtField[id][5].setDisabledTextColor(Color.BLACK);
+						txtField[i][1].setDisabledTextColor(Color.BLACK);
+						txtField[i][2].setDisabledTextColor(Color.BLACK);
+						txtField[i][3].setDisabledTextColor(Color.BLACK);
+						txtField[i][4].setDisabledTextColor(Color.BLACK);
+						txtField[i][5].setDisabledTextColor(Color.BLACK);
+						i = cont;
+					}
+				}
+				
 			}
 
 		}

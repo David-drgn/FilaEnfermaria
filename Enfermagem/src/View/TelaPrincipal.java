@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import Controller.EntradaPaciente;
+import Controller.OrganizaPacientes;
 import Controller.PedeSenha;
 import Model.Cliente;
 import Model.HistoricoChamada;
@@ -20,7 +21,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 	private String prioridade;
 	private static int cont;
 	private int contAtendimento;
-	private int posicaoPrioridade, auxposicaoPrioridade = 0;
+	private int posicaoPrioridade = -1;
 	Cliente cliente = new Cliente();
 	HistoricoChamada historico = new HistoricoChamada();
 
@@ -277,7 +278,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(c, "FILA CHEIA");
 			} else {
 				posicaoPrioridade = cliente.getCont();
-				
+
 				pacientePanel.remove(buttons[8]);
 				pacientePanel.remove(buttons[9]);
 				pacientePanel.remove(buttons[10]);
@@ -285,16 +286,15 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 				pacientePanel.remove(buttons[12]);
 				String contString = "" + (cont + 1);
 				EntradaPaciente adicionaPaciente = new EntradaPaciente();
-				adicionaPaciente.criandoPaciente();
 				buttons[7].setEnabled(true);
+				
+				adicionaPaciente.criandoPaciente();
 
 				txtField[cont][1] = new JTextField(contString);
 				txtField[cont][2] = new JTextField(adicionaPaciente.getNome());
 				txtField[cont][3] = new JTextField(adicionaPaciente.getIdadeEntrada());
 				txtField[cont][4] = new JTextField(adicionaPaciente.getVal());
 				txtField[cont][5] = new JTextField("AGUARDANDO");
-
-				cliente.mostraFila();
 
 				txtField[cont][1].setEnabled(false);
 				txtField[cont][2].setEnabled(false);
@@ -326,6 +326,9 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 				pacientePanel.add(buttons[11]);
 
 				if (prioridade.equals("Preferencial")) {
+					OrganizaPacientes organiza = new OrganizaPacientes();
+					organiza.organiza(contString, adicionaPaciente.getNome(), adicionaPaciente.getIdadeEntrada(),
+							adicionaPaciente.getVal());
 					int i;
 					int contaComum = 0;
 					for (i = posicaoPrioridade; i <= cont; i++) {
@@ -359,6 +362,11 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 						}
 					}
 				}
+
+				else {
+					
+				}
+				cliente.mostraFila();
 
 				if (label[7].getText() == "SENHA") {
 					label[5].setText(txtField[cont][2].getText());
@@ -476,8 +484,8 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			}
 
 			else {
-				id = id-1;
-				String senha1 = "" + (id+2);
+				id = id - 1;
+				String senha1 = "" + (id + 2);
 				for (int i = 0; i <= cont - 1; i++) {
 					if (txtField[i][1].getText().equals(senha1)) {
 						txtField[i][1].setBackground(Color.red);
@@ -494,7 +502,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 						i = cont;
 					}
 				}
-				
+
 			}
 
 		}

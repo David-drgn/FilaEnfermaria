@@ -16,15 +16,15 @@ public class Cliente {
 		this.cont = cont;
 	}
 
-	public static Queue<String> getNomePaciente() {
+	public Queue<String> getNomePaciente() {
 		return nomePaciente;
 	}
 
-	public static Queue<String> getIdadePaciente() {
+	public Queue<String> getIdadePaciente() {
 		return idadePaciente;
 	}
 
-	public static Queue<String> getStatusPaciente() {
+	public Queue<String> getStatusPaciente() {
 		return statusPaciente;
 	}
 
@@ -35,10 +35,10 @@ public class Cliente {
 	static Queue<String> statusPaciente = new LinkedList<>();
 
 	public void adicionaPaciente(String contString, String nome, String idade, String prioridade) {
-		getSenhaPaciente().add(contString);
+		senhaPaciente.add(contString);
 		nomePaciente.add(nome);
 		idadePaciente.add(idade);
-		getPrioridadePaciente().add(prioridade);
+		prioridadePaciente.add(prioridade);
 		statusPaciente.add("AGUARDANDO");
 	}
 
@@ -46,8 +46,8 @@ public class Cliente {
 		String nome, idade, senha, prior, status;
 		nome = nomePaciente.peek();
 		idade = idadePaciente.peek();
-		senha = getSenhaPaciente().peek();
-		prior = getPrioridadePaciente().peek();
+		senha = senhaPaciente.peek();
+		prior = prioridadePaciente.peek();
 		status = statusPaciente.peek();
 
 		System.out.println("Proximo paciente---------------------------------" + "\nNome paciente: " + nome
@@ -70,6 +70,15 @@ public class Cliente {
 		HistoricoChamada historico = new HistoricoChamada();
 		historico.adicionaPaciente(senha, nome, idade, prior);
 	}
+	
+	public void removeProximoOrganiza() {
+		String nome, idade, senha, prior, status;
+		nome = nomePaciente.remove();
+		idade = idadePaciente.remove();
+		senha = senhaPaciente.remove();
+		prior = prioridadePaciente.remove();
+		status = statusPaciente.remove();
+	}
 
 	public void mostraFila() {
 		System.out.println("Todos os paciente----------------------------------" + "\nNome paciente: " + nomePaciente
@@ -78,12 +87,12 @@ public class Cliente {
 				+ "\n-------------------------------------------------- \n");
 	}
 
-	public static Queue<String> getPrioridadePaciente() {
+	public Queue<String> getPrioridadePaciente() {
 		return prioridadePaciente;
 	}
 
-	public static Queue<String> getSenhaPaciente() {
+	public Queue<String> getSenhaPaciente() {
 		return senhaPaciente;
 	}
-
+	
 }
